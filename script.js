@@ -1,20 +1,23 @@
 
 async function carregar(){
- const r = await fetch('clientes.json?'+Date.now());
- const dados = await r.json();
- const lista=document.getElementById('lista');
- lista.innerHTML='';
- dados.forEach(c=>{
- lista.innerHTML += `<tr>
- <td>${c.cliente}</td>
- <td>${c.telefone}</td>
- <td>${c.cidade}</td>
- <td>${c.estado}</td>
- </tr>`;
- });
+try{
+const r=await fetch('clientes.json?'+Date.now());
+const dados=await r.json();
+mostrar(dados);
+}catch(e){}
 }
 
-async function salvarCliente(){
+function mascaraTelefone(el){
+let v=el.value.replace(/\D/g,'').substring(0,11);
+
+if(v.length<=10){
+el.value=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
+}else{
+el.value=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
+}
+}
+
+function salvarCliente(){
 
 const cliente={
 id:Date.now(),
@@ -24,16 +27,36 @@ cidade:document.getElementById('cidade').value,
 estado:document.getElementById('estado').value
 };
 
+if(!cliente.cliente){
+alert('Digite o cliente');
+return;
+}
+
 localStorage.setItem('novo_cliente',JSON.stringify(cliente));
 
 document.getElementById('msg').innerHTML=
-"Cliente preparado para envio. A Action fará a gravação no GitHub.";
+'Cliente enviado para processamento do GitHub.';
+
+document.getElementById('cliente').value='';
+document.getElementById('telefone').value='';
+document.getElementById('cidade').value='';
 
 console.log(cliente);
+}
 
-// Próxima integração usa GitHub Actions + Secret GH_TOKEN.
-// O token permanece protegido no GitHub.
+function mostrar(lista){
+const corpo=document.getElementById('lista');
+corpo.innerHTML='';
 
+lista.forEach(c=>{
+corpo.innerHTML += `
+<tr>
+<td>${c.cliente}</td>
+<td>${c.telefone}</td>
+<td>${c.cidade}</td>
+<td>${c.estado}</td>
+</tr>`;
+});
 }
 
 carregar();

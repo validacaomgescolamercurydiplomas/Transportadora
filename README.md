@@ -1,12 +1,8 @@
 
-Controle Transportadora
+Versão V3 Controle Transportadora
 
-Etapa final da estrutura:
-
-Site
-↓
-GitHub Actions
-↓
-clientes.json
-
-O segredo GH_TOKEN permanece no GitHub Secrets.
+Melhorias:
+- Máscara telefone automática
+- Limpeza do formulário
+- Cadastro preparado para integração GitHub
+- JSON como banco
