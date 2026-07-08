@@ -1,59 +1,62 @@
+let dados=JSON.parse(localStorage.getItem('transportes'))||[];
 
-const CONFIG = {
- usuario: "SEU_USUARIO",
- repositorio: "Transportadora",
- arquivo: "clientes.json"
+function salvar(){
+let item={
+cliente:cliente.value,
+caixas:Number(caixas.value),
+sacos:Number(sacos.value),
+valor:Number(valor.value),
+pago:Number(pago.value)
 };
 
-function mascaraTelefone(el){
- let v = el.value.replace(/\D/g,'').substring(0,11);
- if(v.length > 10){
-  el.value = v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
- }else{
-  el.value = v.replace(/(\d{2})(\d{4})(\d{4})/,'($1) $2-$3');
- }
+dados.push(item);
+localStorage.setItem('transportes',JSON.stringify(dados));
+mostrar();
 }
 
-async function salvarCliente(){
+function mostrar(){
 
-const cliente={
- id:Date.now(),
- cliente:document.getElementById('cliente').value,
- telefone:document.getElementById('telefone').value,
- cidade:document.getElementById('cidade').value,
- estado:document.getElementById('estado').value
-};
+let tabela="";
+let totalCx=0,totalSc=0,totalV=0,totalP=0;
 
-if(!cliente.cliente){
- alert("Informe o cliente");
- return;
-}
+let clientes={};
 
-// Envia para o fluxo seguro do GitHub Actions
-await fetch("https://api.github.com/repos/"+CONFIG.usuario+"/"+CONFIG.repositorio+"/dispatches",{
- method:"POST",
- headers:{
-  "Accept":"application/vnd.github+json"
- },
- body:JSON.stringify({
-  event_type:"novo_cliente",
-  client_payload:cliente
- })
+dados.forEach(x=>{
+if(!clientes[x.cliente])
+clientes[x.cliente]={caixas:0,sacos:0,valor:0,pago:0};
+
+clientes[x.cliente].caixas+=x.caixas;
+clientes[x.cliente].sacos+=x.sacos;
+clientes[x.cliente].valor+=x.valor;
+clientes[x.cliente].pago+=x.pago;
 });
 
-document.getElementById("msg").innerHTML="Cliente enviado para o GitHub.";
+Object.keys(clientes).forEach(c=>{
+let x=clientes[c];
+tabela+=`<tr>
+<td>${c}</td>
+<td>${x.caixas}</td>
+<td>${x.sacos}</td>
+<td>${x.caixas+x.sacos}</td>
+<td>R$ ${x.valor}</td>
+<td>R$ ${x.pago}</td>
+<td>R$ ${x.valor-x.pago}</td>
+</tr>`;
 
+totalCx+=x.caixas;
+totalSc+=x.sacos;
+totalV+=x.valor;
+totalP+=x.pago;
+});
+
+lista.innerHTML=tabela;
+
+cx.innerHTML=totalCx;
+sc.innerHTML=totalSc;
+it.innerHTML=totalCx+totalSc;
+vt.innerHTML="R$ "+totalV;
+vp.innerHTML="R$ "+totalP;
+vr.innerHTML="R$ "+(totalV-totalP);
 }
 
-async function carregar(){
- try{
- const r=await fetch("clientes.json?"+Date.now());
- const dados=await r.json();
- const lista=document.getElementById("lista");
- dados.forEach(c=>{
- lista.innerHTML += `<tr><td>${c.cliente}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td></tr>`;
- });
- }catch(e){}
-}
-
-carregar();
+mostrar();
