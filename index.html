@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,25 +11,36 @@
 <div class="container">
 <h1>Controle Transportadora</h1>
 
+<h2>Filtro por Período</h2>
+<button onclick="filtrarHoje()">Hoje</button>
+<button onclick="filtrarSemana()">Semana</button>
+<button onclick="filtrarMes()">Mês Atual</button>
+<button onclick="mostrar()">Todos</button>
+
+<br>
+<input type="date" id="inicio">
+<input type="date" id="fim">
+<button onclick="filtrarPeriodo()">Filtrar</button>
+
 <div class="resumo">
-<div>Total Caixas<br><b id="cx">0</b></div>
-<div>Total Sacos<br><b id="sc">0</b></div>
-<div>Total Itens<br><b id="it">0</b></div>
+<div>Caixas<br><b id="cx">0</b></div>
+<div>Sacos<br><b id="sc">0</b></div>
+<div>Itens<br><b id="it">0</b></div>
 <div>Valor Total<br><b id="vt">R$ 0</b></div>
 <div>Pago<br><b id="vp">R$ 0</b></div>
 <div>Restante<br><b id="vr">R$ 0</b></div>
 </div>
 
 <h2>Nova Movimentação</h2>
+<input id="data" type="date">
 <input id="cliente" placeholder="Cliente">
-<input id="caixas" type="number" placeholder="Total Caixas">
-<input id="sacos" type="number" placeholder="Total Sacos">
+<input id="caixas" type="number" placeholder="Caixas">
+<input id="sacos" type="number" placeholder="Sacos">
 <input id="valor" type="number" placeholder="Valor Total">
 <input id="pago" type="number" placeholder="Valor Pago">
 <button onclick="salvar()">Salvar</button>
 
 <h2>Controle por Cliente</h2>
-
 <table>
 <thead>
 <tr>
@@ -36,15 +48,15 @@
 <th>Caixas</th>
 <th>Sacos</th>
 <th>Itens</th>
-<th>Valor Total</th>
+<th>Valor</th>
 <th>Pago</th>
 <th>Restante</th>
 </tr>
 </thead>
 <tbody id="lista"></tbody>
 </table>
-
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
