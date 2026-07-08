@@ -15,23 +15,45 @@
 <input id="telefoneCliente" placeholder="Telefone">
 <input id="cidadeCliente" placeholder="Cidade">
 <input id="estadoCliente" placeholder="Estado">
-<button id="btnSalvarCliente">Salvar Cliente</button>
-<p id="mensagem"></p>
+<button onclick="salvarCliente()">Salvar Cliente</button>
 
-<h2>Clientes Cadastrados</h2>
+<h2>Buscar Cliente</h2>
+<input id="busca" placeholder="Buscar cliente" onkeyup="listarClientes()">
 <table>
-<thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Estado</th></tr></thead>
 <tbody id="clientesLista"></tbody>
 </table>
 
 <h2>Nova Movimentação</h2>
-<select id="clienteSelect"></select>
-<input id="caixas" placeholder="Caixas" type="number">
-<input id="sacos" placeholder="Sacos" type="number">
-<input id="valor" placeholder="Valor" type="number">
-<input id="pago" placeholder="Pago" type="number">
-<button>Salvar Transporte</button>
+<input id="data" type="date">
+<select id="cliente"></select>
+<input id="caixas" type="number" placeholder="Caixas">
+<input id="sacos" type="number" placeholder="Sacos">
+<input id="valor" type="number" placeholder="Valor Total">
+<input id="pago" type="number" placeholder="Valor Pago">
+<button onclick="salvarMovimento()">Salvar Transporte</button>
 
+<h2>Filtros</h2>
+<button onclick="mostrarTodos()">Todos</button>
+<button onclick="filtrarMes()">Mês Atual</button>
+<input id="inicio" type="date">
+<input id="fim" type="date">
+<button onclick="filtrarPeriodo()">Filtrar</button>
+
+<div class="resumo">
+<div>Caixas<br><b id="totalCaixas">0</b></div>
+<div>Sacos<br><b id="totalSacos">0</b></div>
+<div>Itens<br><b id="totalItens">0</b></div>
+<div>Valor Total<br><b id="totalValor">0</b></div>
+<div>Pago<br><b id="totalPago">0</b></div>
+<div>Restante<br><b id="totalRestante">0</b></div>
+</div>
+
+<table>
+<thead>
+<tr><th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th></tr>
+</thead>
+<tbody id="relatorio"></tbody>
+</table>
 </div>
 <script src="script.js"></script>
 </body>
