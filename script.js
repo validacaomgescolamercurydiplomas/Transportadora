@@ -1,54 +1,8 @@
-let dados=JSON.parse(localStorage.getItem('movimentos'))||[];
-let clientes=JSON.parse(localStorage.getItem('clientes'))||[];
-
-function carregar(){
- cliente.innerHTML='';
- clientes.forEach(c=>cliente.innerHTML+=`<option>${c.nome}</option>`);
- mostrar();
-}
-
-function salvar(){
- if(!data.value){
-  alert('Informe a data da movimentação');
-  return;
- }
- dados.push({
-  data:data.value,
-  cliente:cliente.value,
-  caixas:Number(caixas.value),
-  sacos:Number(sacos.value),
-  valor:Number(valor.value),
-  pago:Number(pago.value)
- });
- localStorage.setItem('movimentos',JSON.stringify(dados));
- mostrar();
-}
-
-function mostrar(){
- let html='';
- let cx=0,sc=0,v=0,p=0;
-
- dados.forEach(x=>{
- html+=`<tr>
- <td>${formatarData(x.data)}</td>
- <td>${x.cliente}</td>
- <td>${x.caixas}</td>
- <td>${x.sacos}</td>
- <td>${x.caixas+x.sacos}</td>
- <td>R$${x.valor}</td>
- <td>R$${x.pago}</td>
- <td>R$${x.valor-x.pago}</td>
- </tr>`;
- cx+=x.caixas;sc+=x.sacos;v+=x.valor;p+=x.pago;
- });
-
- lista.innerHTML=html;
- resumo.innerHTML=`Caixas: ${cx} | Sacos: ${sc} | Itens: ${cx+sc} | Valor: R$${v} | Pago: R$${p} | Restante: R$${v-p}`;
-}
-
-function formatarData(d){
- let x=d.split('-');
- return x[2]+'/'+x[1]+'/'+x[0];
-}
-
-carregar();
+let clientes=JSON.parse(localStorage.getItem('clientes'))||[];let movimentos=JSON.parse(localStorage.getItem('movimentos'))||[];
+function salvarCliente(){if(!nomeCliente.value){alert('Informe o cliente');return}clientes.push({nome:nomeCliente.value,telefone:telefoneCliente.value,cidade:cidadeCliente.value,estado:estadoCliente.value});localStorage.setItem('clientes',JSON.stringify(clientes));carregarClientes();}
+function carregarClientes(){cliente.innerHTML='';clientes.forEach(c=>cliente.innerHTML+=`<option>${c.nome}</option>`);listarClientes();}
+function listarClientes(){clientesLista.innerHTML=clientes.map(c=>`<tr><td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td></tr>`).join('');}
+function salvarMovimento(){if(!data.value){alert('Informe a data');return}movimentos.push({data:data.value,cliente:cliente.value,caixas:+caixas.value,sacos:+sacos.value,valor:+valor.value,pago:+pago.value});localStorage.setItem('movimentos',JSON.stringify(movimentos));mostrarTodos();}
+function gerar(l){let h='',cx=0,sc=0,v=0,p=0;l.forEach(x=>{h+=`<tr><td>${x.data.split('-').reverse().join('/')}</td><td>${x.cliente}</td><td>${x.caixas}</td><td>${x.sacos}</td><td>${x.caixas+x.sacos}</td><td>R$${x.valor}</td><td>R$${x.pago}</td><td>R$${x.valor-x.pago}</td></tr>`;cx+=x.caixas;sc+=x.sacos;v+=x.valor;p+=x.pago});relatorio.innerHTML=h;resumo.innerHTML=`Caixas ${cx} | Sacos ${sc} | Itens ${cx+sc} | Total R$${v} | Pago R$${p} | Restante R$${v-p}`;}
+function mostrarTodos(){gerar(movimentos)}function filtrarMes(){let m=new Date().getMonth();gerar(movimentos.filter(x=>new Date(x.data).getMonth()==m))}function filtrarPeriodo(){gerar(movimentos.filter(x=>x.data>=inicio.value&&x.data<=fim.value))}
+carregarClientes();mostrarTodos();
