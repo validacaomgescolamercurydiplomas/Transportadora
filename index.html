@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Controle Transportadora</title>
@@ -7,16 +7,30 @@
 </head>
 <body>
 <div class="container">
+
 <h1>CONTROLE TRANSPORTADORA</h1>
+
+<h2>RESUMO SEMANAL</h2>
+<p id="periodo"></p>
+<input id="inicioResumo" type="date">
+<input id="fimResumo" type="date">
+<button onclick="filtrarPeriodo()">FILTRAR PERÍODO</button>
+
+<div id="resumo"></div>
 
 <h2>CADASTRO CLIENTE</h2>
 <input id="nomeCliente" placeholder="CLIENTE">
 <input id="telefoneCliente" placeholder="(00) 00000-0000">
 <input id="cidadeCliente" placeholder="CIDADE">
-<select id="estadoCliente"><option value="">SELECIONE O ESTADO</option><option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option></select>
-<button onclick="salvarCliente()">SALVAR</button>
+<select id="estadoCliente">
+<option value="">SELECIONE ESTADO</option>
+<option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option>
+</select>
+<button onclick="salvarCliente()">SALVAR CLIENTE</button>
 
-<table><tbody id="clientesLista"></tbody></table>
+<table>
+<tbody id="clientesLista"></tbody>
+</table>
 
 <h2>MOVIMENTAÇÃO</h2>
 <input id="data" type="date">
@@ -27,9 +41,11 @@
 <input id="pago" type="number" placeholder="PAGO">
 <button onclick="salvarMov()">SALVAR MOVIMENTAÇÃO</button>
 
-<div id="resumo"></div>
+<table>
+<thead><tr><th>DATA</th><th>CLIENTE</th><th>CAIXAS</th><th>SACOS</th><th>ITENS</th><th>VALOR</th><th>PAGO</th><th>RESTANTE</th><th>AÇÕES</th></tr></thead>
+<tbody id="relatorio"></tbody>
+</table>
 
-<table><tbody id="relatorio"></tbody></table>
 </div>
 <script src="script.js"></script>
 </body>
