@@ -1,19 +1,11 @@
 
-# Controle Transportadora - GitHub API Forma B
+Sistema preparado para GitHub API.
 
-Versão preparada para usar GitHub como armazenamento.
+O segredo GH_TOKEN deve ficar somente nos Secrets do GitHub.
 
-Arquivos na raiz:
+Arquivos:
 - index.html
-- style.css
 - script.js
+- style.css
 - clientes.json
-
-Configurar no script.js:
-- usuário GitHub
-- repositório
-- token
-
-Observação:
-Para produção, o token não deve ficar exposto no JavaScript público.
-O ideal é usar GitHub Actions como intermediário.
+- .github/workflows/salvar-cliente.yml

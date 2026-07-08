@@ -1,58 +1,52 @@
 
-let clientes = [];
+let clientes=[];
 
-const CONFIG = {
-    usuario: "SEU_USUARIO_GITHUB",
-    repositorio: "Transportadora",
-    arquivo: "clientes.json",
-    token: "COLOQUE_SEU_TOKEN"
-};
-
-async function carregarClientes(){
-
-try{
-let resposta = await fetch("clientes.json");
-clientes = await resposta.json();
-listarClientes();
-}catch(e){
-clientes=[];
-}
-
+async function carregar(){
+ try{
+  const r=await fetch('clientes.json?x='+Date.now());
+  clientes=await r.json();
+  listar();
+ }catch(e){
+  clientes=[];
+ }
 }
 
 function salvarCliente(){
+ const cliente=document.getElementById('cliente').value;
+ const telefone=document.getElementById('telefone').value;
+ const cidade=document.getElementById('cidade').value;
+ const estado=document.getElementById('estado').value;
 
-let novo = {
-id: Date.now(),
-cliente: document.getElementById("cliente").value,
-telefone: document.getElementById("telefone").value,
-cidade: document.getElementById("cidade").value,
-estado: document.getElementById("estado").value
-};
+ if(!cliente){
+  alert('Informe o cliente');
+  return;
+ }
 
-clientes.push(novo);
+ const novo={
+  id:Date.now(),
+  cliente,
+  telefone,
+  cidade,
+  estado
+ };
 
-listarClientes();
-
-alert("Cliente adicionado. Próxima etapa enviaremos para GitHub API.");
+ alert('Cadastro preparado. A gravação será feita pela GitHub Action.');
+ console.log(novo);
 }
 
+function listar(){
+ const lista=document.getElementById('lista');
+ lista.innerHTML='';
 
-function listarClientes(){
-
-let tabela=document.getElementById("lista");
-tabela.innerHTML="";
-
-clientes.forEach(c=>{
-tabela.innerHTML += `
-<tr>
-<td>${c.cliente}</td>
-<td>${c.telefone}</td>
-<td>${c.cidade}</td>
-<td>${c.estado}</td>
-</tr>`;
-});
-
+ clientes.forEach(c=>{
+  lista.innerHTML += `
+  <tr>
+   <td>${c.cliente}</td>
+   <td>${c.telefone}</td>
+   <td>${c.cidade}</td>
+   <td>${c.estado}</td>
+  </tr>`;
+ });
 }
 
-carregarClientes();
+carregar();
