@@ -1,20 +1,31 @@
 
-name: Atualizar clientes
+name: Salvar cliente
 
 on:
-  workflow_dispatch:
+ workflow_dispatch:
+ workflow_call:
+ repository_dispatch:
+   types: [novo_cliente]
 
 permissions:
-  contents: write
+ contents: write
 
 jobs:
-  atualizar:
-    runs-on: ubuntu-latest
+ salvar:
+  runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
+  steps:
+  - uses: actions/checkout@v4
 
-    - name: Verificar banco JSON
-      run: |
-        echo "Banco preparado"
-        cat clientes.json
+  - name: Atualizar banco JSON
+    run: |
+      echo "Cliente recebido"
+      cat clientes.json
+
+  - name: Commit
+    run: |
+      git config user.name github-actions
+      git config user.email actions@github.com
+      git add .
+      git commit -m "Atualiza clientes" || echo "sem alterações"
+      git push
