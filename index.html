@@ -10,32 +10,38 @@
 <body>
 
 <div class="container">
+
 <h1>Controle Transportadora</h1>
 
-<div class="cards">
-<div class="card"><h3>Faturamento</h3><p>R$ 0,00</p></div>
-<div class="card"><h3>Recebido</h3><p>R$ 0,00</p></div>
-<div class="card"><h3>Pendente</h3><p>R$ 0,00</p></div>
-</div>
-
 <h2>Cadastro de Cliente</h2>
-<input placeholder="Nome do cliente">
-<input placeholder="Telefone">
-<input placeholder="Cidade">
-<button>Salvar Cliente</button>
 
-<h2>Nova Entrega</h2>
-<input placeholder="Quantidade de sacos">
-<input placeholder="Quantidade de caixas">
-<input placeholder="Valor">
-<select>
-<option>Pago</option>
-<option>Pendente</option>
-</select>
-<button>Registrar</button>
+<input id="cliente" placeholder="Nome do Cliente">
+<input id="telefone" placeholder="Telefone">
+<input id="cidade" placeholder="Cidade">
+<input id="estado" placeholder="Estado">
+
+<button onclick="salvarCliente()">Salvar Cliente</button>
+
+<h2>Clientes Cadastrados</h2>
+
+<table>
+<thead>
+<tr>
+<th>Cliente</th>
+<th>Telefone</th>
+<th>Cidade</th>
+<th>Estado</th>
+<th>Ação</th>
+</tr>
+</thead>
+
+<tbody id="listaClientes"></tbody>
+
+</table>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
