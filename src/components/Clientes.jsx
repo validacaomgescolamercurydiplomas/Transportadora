@@ -1,1 +1,0 @@
-export default function Clientes(){return <section><h2>Clientes</h2><input placeholder='Nome'/><button>Cadastrar</button></section>}

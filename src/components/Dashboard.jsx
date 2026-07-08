@@ -1,1 +1,0 @@
-export default function Dashboard(){return <section><h2>Dashboard</h2><p>Faturamento: R$ 0</p><p>Recebido: R$ 0</p><p>Pendente: R$ 0</p></section>}
