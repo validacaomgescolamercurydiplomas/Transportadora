@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <title>Controle Transportadora</title>
@@ -10,13 +9,18 @@
 <div class="container">
 <h1>CONTROLE TRANSPORTADORA</h1>
 
-<h2>CADASTRO CLIENTE</h2>
+<h2>Cadastro de Cliente</h2>
 <input id="nomeCliente" placeholder="CLIENTE">
-<input id="telefoneCliente" placeholder="(00) 00000-0000">
+<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15">
 <input id="cidadeCliente" placeholder="CIDADE">
 <select id="estadoCliente">
-<option>SELECIONE ESTADO</option>
-<option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option>
+<option value="">ESTADO</option>
+<option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+<option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+<option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+<option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+<option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+<option>RS</option><option>SC</option><option>SP</option><option>TO</option>
 </select>
 <button onclick="salvarCliente()">SALVAR</button>
 <button onclick="cancelarCliente()">CANCELAR</button>
@@ -26,7 +30,7 @@
 <tbody id="clientesLista"></tbody>
 </table>
 
-<h2>MOVIMENTAÇÃO</h2>
+<h2>Movimentação</h2>
 <input id="data" type="date">
 <select id="cliente"></select>
 <input id="caixas" type="number" placeholder="CAIXAS">
