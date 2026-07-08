@@ -1,8 +1,7 @@
 
-Versão V3 Controle Transportadora
+V4 Integração GitHub API.
 
-Melhorias:
-- Máscara telefone automática
-- Limpeza do formulário
-- Cadastro preparado para integração GitHub
-- JSON como banco
+Estrutura preparada:
+Site -> GitHub Dispatch -> Action -> clientes.json
+
+Não colocar token no JavaScript público.
