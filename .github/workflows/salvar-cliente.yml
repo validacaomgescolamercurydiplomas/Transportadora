@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configurar
-        run: echo "GitHub API preparada"
-
-      - name: Commit autorizado
+      - name: Verificar arquivos
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git status
+          echo "Arquivos encontrados:"
+          ls
+
+      - name: Preparado para atualizar clientes.json
+        run: |
+          echo "Workflow funcionando"
