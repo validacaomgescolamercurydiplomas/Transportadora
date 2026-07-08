@@ -1,7 +1,12 @@
 
-Sistema preparado para próxima etapa.
+Controle Transportadora
 
-Fluxo:
-Site -> entrada.json -> GitHub Action -> clientes.json
+Etapa final da estrutura:
 
-O workflow está funcionando.
+Site
+↓
+GitHub Actions
+↓
+clientes.json
+
+O segredo GH_TOKEN permanece no GitHub Secrets.

@@ -3,43 +3,44 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Controle Transportadora</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="container">
 <h1>Controle Transportadora</h1>
-
-<h2>Cadastro de Cliente</h2>
 
 <input id="cliente" placeholder="Cliente">
 <input id="telefone" placeholder="Telefone">
 <input id="cidade" placeholder="Cidade">
 
 <select id="estado">
-<option value="">Estado</option>
-<option>AC</option><option>AL</option><option>AP</option><option>AM</option>
-<option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-<option>GO</option><option>MA</option><option>MT</option><option>MS</option>
-<option>MG</option><option>PA</option><option>PB</option><option>PR</option>
-<option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-<option>RS</option><option>SC</option><option>SP</option><option>TO</option>
+<option>Estado</option>
+<option>TO</option>
+<option>GO</option>
+<option>MG</option>
+<option>SP</option>
+<option>RJ</option>
+<option>BA</option>
+<option>MA</option>
 </select>
 
 <button onclick="salvarCliente()">Salvar Cliente</button>
 
-<p id="status"></p>
+<p id="msg"></p>
 
 <h2>Clientes</h2>
 <table>
 <thead>
-<tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Estado</th></tr>
+<tr>
+<th>Cliente</th>
+<th>Telefone</th>
+<th>Cidade</th>
+<th>Estado</th>
+</tr>
 </thead>
 <tbody id="lista"></tbody>
 </table>
-
 </div>
 
 <script src="script.js"></script>
