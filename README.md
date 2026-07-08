@@ -1,1 +1,3 @@
-Controle Transportadora - Projeto React pronto para GitHub Pages
+Controle Transportadora
+
+Projeto React configurado para GitHub Pages.
