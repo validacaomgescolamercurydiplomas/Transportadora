@@ -1,11 +1,7 @@
 
-Sistema preparado para GitHub API.
+Sistema preparado para próxima etapa.
 
-O segredo GH_TOKEN deve ficar somente nos Secrets do GitHub.
+Fluxo:
+Site -> entrada.json -> GitHub Action -> clientes.json
 
-Arquivos:
-- index.html
-- script.js
-- style.css
-- clientes.json
-- .github/workflows/salvar-cliente.yml
+O workflow está funcionando.

@@ -3,50 +3,49 @@ let clientes=[];
 
 async function carregar(){
  try{
-  const r=await fetch('clientes.json?x='+Date.now());
+  const r=await fetch('clientes.json?'+Date.now());
   clientes=await r.json();
   listar();
- }catch(e){
-  clientes=[];
- }
+ }catch(e){}
 }
 
 function salvarCliente(){
- const cliente=document.getElementById('cliente').value;
- const telefone=document.getElementById('telefone').value;
- const cidade=document.getElementById('cidade').value;
- const estado=document.getElementById('estado').value;
 
- if(!cliente){
-  alert('Informe o cliente');
-  return;
- }
+const novo={
+ id:Date.now(),
+ cliente:document.getElementById('cliente').value,
+ telefone:document.getElementById('telefone').value,
+ cidade:document.getElementById('cidade').value,
+ estado:document.getElementById('estado').value
+};
 
- const novo={
-  id:Date.now(),
-  cliente,
-  telefone,
-  cidade,
-  estado
- };
+if(!novo.cliente){
+ alert('Informe o cliente');
+ return;
+}
 
- alert('Cadastro preparado. A gravação será feita pela GitHub Action.');
- console.log(novo);
+document.getElementById('status').innerHTML=
+'Cliente preparado para envio ao GitHub.';
+
+console.log(novo);
+
+// Próxima etapa: envio automático para entrada.json via API
+
 }
 
 function listar(){
- const lista=document.getElementById('lista');
- lista.innerHTML='';
+let tabela=document.getElementById('lista');
+tabela.innerHTML='';
 
- clientes.forEach(c=>{
-  lista.innerHTML += `
-  <tr>
-   <td>${c.cliente}</td>
-   <td>${c.telefone}</td>
-   <td>${c.cidade}</td>
-   <td>${c.estado}</td>
-  </tr>`;
- });
+clientes.forEach(c=>{
+ tabela.innerHTML += `
+ <tr>
+ <td>${c.cliente}</td>
+ <td>${c.telefone}</td>
+ <td>${c.cidade}</td>
+ <td>${c.estado}</td>
+ </tr>`;
+});
 }
 
 carregar();
