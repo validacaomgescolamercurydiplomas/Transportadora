@@ -1,0 +1,1 @@
+export default function App(){return <div className='box'><h1>Controle Transportadora</h1><h2>Dashboard</h2><p>Faturamento: R$ 0</p><p>Recebido: R$ 0</p><p>Pendente: R$ 0</p><h2>Clientes</h2><input placeholder='Cliente'/><button>Cadastrar</button><h2>Entrega</h2><input placeholder='Sacos'/><input placeholder='Caixas'/><input placeholder='Valor'/><button>Salvar</button></div>}
