@@ -1,5 +1,5 @@
 
-name: Atualizar clientes
+name: Salvar clientes
 
 on:
   workflow_dispatch:
@@ -8,17 +8,16 @@ permissions:
   contents: write
 
 jobs:
-  atualizar:
+  salvar:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Verificar arquivos
-        run: |
-          echo "Arquivos encontrados:"
-          ls
+    - name: Preparar ambiente
+      run: |
+        echo "Sistema conectado ao GitHub Actions"
 
-      - name: Preparado para atualizar clientes.json
-        run: |
-          echo "Workflow funcionando"
+    - name: Banco JSON
+      run: |
+        cat clientes.json
