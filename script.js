@@ -1,76 +1,45 @@
+let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
-let dados=JSON.parse(localStorage.getItem('transportes'))||[];
-let filtrados=dados;
+const nome = document.getElementById('nomeCliente');
+const telefone = document.getElementById('telefoneCliente');
+const cidade = document.getElementById('cidadeCliente');
+const estado = document.getElementById('estadoCliente');
+const lista = document.getElementById('clientesLista');
+const select = document.getElementById('clienteSelect');
 
-function salvar(){
-dados.push({
-data:data.value,
-cliente:cliente.value,
-caixas:Number(caixas.value),
-sacos:Number(sacos.value),
-valor:Number(valor.value),
-pago:Number(pago.value)
+document.getElementById('btnSalvarCliente').addEventListener('click', function(){
+    if(!nome.value.trim()){
+        mensagem.innerHTML = 'Informe o nome do cliente';
+        return;
+    }
+
+    clientes.push({
+        nome:nome.value,
+        telefone:telefone.value,
+        cidade:cidade.value,
+        estado:estado.value
+    });
+
+    localStorage.setItem('clientes', JSON.stringify(clientes));
+
+    mensagem.innerHTML = 'Cliente salvo com sucesso!';
+
+    nome.value='';
+    telefone.value='';
+    cidade.value='';
+    estado.value='';
+
+    carregarClientes();
 });
-localStorage.setItem('transportes',JSON.stringify(dados));
-mostrar();
+
+function carregarClientes(){
+    lista.innerHTML='';
+    select.innerHTML='';
+
+    clientes.forEach(c=>{
+        lista.innerHTML += `<tr><td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td></tr>`;
+        select.innerHTML += `<option>${c.nome}</option>`;
+    });
 }
 
-function aplicar(lista){
-let clientes={};
-lista.forEach(x=>{
-if(!clientes[x.cliente]) clientes[x.cliente]={caixas:0,sacos:0,valor:0,pago:0};
-clientes[x.cliente].caixas+=x.caixas;
-clientes[x.cliente].sacos+=x.sacos;
-clientes[x.cliente].valor+=x.valor;
-clientes[x.cliente].pago+=x.pago;
-});
-
-let html="",tc=0,ts=0,tv=0,tp=0;
-
-Object.keys(clientes).forEach(c=>{
-let x=clientes[c];
-html+=`<tr><td>${c}</td><td>${x.caixas}</td><td>${x.sacos}</td><td>${x.caixas+x.sacos}</td><td>R$ ${x.valor}</td><td>R$ ${x.pago}</td><td>R$ ${x.valor-x.pago}</td></tr>`;
-tc+=x.caixas; ts+=x.sacos; tv+=x.valor; tp+=x.pago;
-});
-
-listaEl.innerHTML=html;
-cx.innerHTML=tc;
-sc.innerHTML=ts;
-it.innerHTML=tc+ts;
-vt.innerHTML="R$ "+tv;
-vp.innerHTML="R$ "+tp;
-vr.innerHTML="R$ "+(tv-tp);
-}
-
-function mostrar(){aplicar(dados)}
-
-function filtrarPeriodo(){
-let a=inicio.value,b=fim.value;
-aplicar(dados.filter(x=>x.data>=a && x.data<=b));
-}
-
-function filtrarHoje(){
-let d=new Date().toISOString().slice(0,10);
-aplicar(dados.filter(x=>x.data==d));
-}
-
-function filtrarSemana(){
-let hoje=new Date();
-let inicioSemana=new Date();
-inicioSemana.setDate(hoje.getDate()-6);
-aplicar(dados.filter(x=>{
-let d=new Date(x.data);
-return d>=inicioSemana && d<=hoje;
-}));
-}
-
-function filtrarMes(){
-let m=new Date().getMonth();
-let a=new Date().getFullYear();
-aplicar(dados.filter(x=>{
-let d=new Date(x.data);
-return d.getMonth()==m && d.getFullYear()==a;
-}));
-}
-
-mostrar();
+carregarClientes();

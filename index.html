@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,9 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="container">
-
 <h1>Controle Transportadora</h1>
 
 <h2>Cadastro de Cliente</h2>
@@ -18,55 +15,22 @@
 <input id="telefoneCliente" placeholder="Telefone">
 <input id="cidadeCliente" placeholder="Cidade">
 <input id="estadoCliente" placeholder="Estado">
-<button onclick="salvarCliente()">Salvar Cliente</button>
+<button id="btnSalvarCliente">Salvar Cliente</button>
+<p id="mensagem"></p>
 
-<h2>Buscar Cliente</h2>
-<input id="buscaCliente" placeholder="Nome, telefone, cidade ou estado" onkeyup="buscarCliente()">
+<h2>Clientes Cadastrados</h2>
 <table>
-<thead>
-<tr>
-<th>Cliente</th>
-<th>Telefone</th>
-<th>Cidade</th>
-<th>Estado</th>
-</tr>
-</thead>
+<thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Estado</th></tr></thead>
 <tbody id="clientesLista"></tbody>
 </table>
 
 <h2>Nova Movimentação</h2>
-<input id="data" type="date">
 <select id="clienteSelect"></select>
-<input id="caixas" type="number" placeholder="Total Caixas">
-<input id="sacos" type="number" placeholder="Total Sacos">
-<input id="valor" type="number" placeholder="Valor Total">
-<input id="pago" type="number" placeholder="Valor Pago">
-<button onclick="salvarMov()">Salvar</button>
-
-<h2>Filtro</h2>
-<button onclick="mostrar()">Todos</button>
-<button onclick="filtrarMes()">Mês Atual</button>
-<input id="inicio" type="date">
-<input id="fim" type="date">
-<button onclick="filtrarPeriodo()">Filtrar</button>
-
-<div class="resumo">
-<div>Caixas<br><b id="cx">0</b></div>
-<div>Sacos<br><b id="sc">0</b></div>
-<div>Itens<br><b id="it">0</b></div>
-<div>Valor Total<br><b id="vt">R$0</b></div>
-<div>Pago<br><b id="vp">R$0</b></div>
-<div>Restante<br><b id="vr">R$0</b></div>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th>
-</tr>
-</thead>
-<tbody id="relatorio"></tbody>
-</table>
+<input id="caixas" placeholder="Caixas" type="number">
+<input id="sacos" placeholder="Sacos" type="number">
+<input id="valor" placeholder="Valor" type="number">
+<input id="pago" placeholder="Pago" type="number">
+<button>Salvar Transporte</button>
 
 </div>
 <script src="script.js"></script>
