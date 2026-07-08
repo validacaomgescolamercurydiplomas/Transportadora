@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,14 +8,11 @@
 </head>
 <body>
 <div class="container">
-
 <h1>Controle Transportadora</h1>
 
 <h2>Cadastro Cliente</h2>
 <input id="nomeCliente" placeholder="Cliente">
-
-<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15">
-
+<input id="telefoneCliente" placeholder="(00) 00000-0000" oninput="mascaraTelefone(this)">
 <input id="cidadeCliente" placeholder="Cidade">
 
 <select id="estadoCliente">
@@ -28,8 +26,33 @@
 <option>SP</option><option>SE</option><option>TO</option>
 </select>
 
-<button>Salvar Cliente</button>
+<button onclick="salvarCliente()">Salvar Cliente</button>
+<button onclick="cancelarCliente()">Cancelar</button>
 
+<h2>Clientes</h2>
+<input id="busca" placeholder="Buscar cliente" onkeyup="listarClientes()">
+<table>
+<tbody id="clientesLista"></tbody>
+</table>
+
+<h2>Movimentação</h2>
+<input id="data" type="date">
+<select id="cliente"></select>
+<input id="caixas" type="number" placeholder="Caixas">
+<input id="sacos" type="number" placeholder="Sacos">
+<input id="valor" type="number" placeholder="Valor">
+<input id="pago" type="number" placeholder="Pago">
+<button onclick="salvarMovimento()">Salvar Transporte</button>
+
+<h2>Relatório</h2>
+<table>
+<thead>
+<tr><th>Data</th><th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th></tr>
+</thead>
+<tbody id="relatorio"></tbody>
+</table>
 </div>
+
+<script src="script.js"></script>
 </body>
 </html>
