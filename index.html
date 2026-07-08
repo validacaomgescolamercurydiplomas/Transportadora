@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Controle Transportadora</title>
@@ -9,38 +9,32 @@
 <div class="container">
 <h1>CONTROLE TRANSPORTADORA</h1>
 
-<h2>Cadastro de Cliente</h2>
+<h2>RESUMO SEMANAL</h2>
+<p>Período automático: Segunda a Domingo</p>
+<input id="inicioResumo" type="date">
+<input id="fimResumo" type="date">
+<button onclick="filtrarResumo()">Selecionar Período</button>
+
+<div id="resumo"></div>
+
+<h2>CADASTRO CLIENTE</h2>
 <input id="nomeCliente" placeholder="CLIENTE">
-<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15">
+<input id="telefoneCliente" placeholder="(00) 00000-0000">
 <input id="cidadeCliente" placeholder="CIDADE">
-<select id="estadoCliente">
-<option value="">ESTADO</option>
-<option>AC</option><option>AL</option><option>AP</option><option>AM</option>
-<option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-<option>GO</option><option>MA</option><option>MT</option><option>MS</option>
-<option>MG</option><option>PA</option><option>PB</option><option>PR</option>
-<option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-<option>RS</option><option>SC</option><option>SP</option><option>TO</option>
-</select>
+<select id="estadoCliente"><option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option></select>
 <button onclick="salvarCliente()">SALVAR</button>
-<button onclick="cancelarCliente()">CANCELAR</button>
 
-<table>
-<thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead>
-<tbody id="clientesLista"></tbody>
-</table>
-
-<h2>Movimentação</h2>
+<h2>MOVIMENTAÇÃO</h2>
 <input id="data" type="date">
 <select id="cliente"></select>
 <input id="caixas" type="number" placeholder="CAIXAS">
 <input id="sacos" type="number" placeholder="SACOS">
 <input id="valor" type="number" placeholder="VALOR">
 <input id="pago" type="number" placeholder="PAGO">
-<button onclick="salvarMov()">SALVAR MOVIMENTAÇÃO</button>
+<button onclick="salvarMov()">SALVAR</button>
 
 <table>
-<thead><tr><th>Data</th><th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th><th>Ações</th></tr></thead>
+<thead><tr><th>Data</th><th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th></tr></thead>
 <tbody id="relatorio"></tbody>
 </table>
 </div>
