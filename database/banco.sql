@@ -1,2 +1,0 @@
-create table clientes(id bigint generated always as identity primary key,nome text,telefone text,cidade text);
-create table transportes(id bigint generated always as identity primary key,cliente_id bigint,sacos integer,caixas integer,valor numeric,status text);
