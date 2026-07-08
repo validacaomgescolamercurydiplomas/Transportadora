@@ -1,26 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Controle Transportadora</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<html><head><meta charset="UTF-8"><title>Controle Transportadora</title><link rel="stylesheet" href="style.css"></head>
 <body>
 <div class="container">
 <h1>Controle Transportadora</h1>
 
 <h2>Cadastro Cliente</h2>
 <input id="nomeCliente" placeholder="Cliente">
-<input id="telefoneCliente" placeholder="Telefone">
+<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15" oninput="mascaraTelefone(this)">
 <input id="cidadeCliente" placeholder="Cidade">
-<select id="estadoCliente"><option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option></select>
-<button onclick="salvarCliente()">Salvar Cliente</button>
+<select id="estadoCliente"><option>Selecione</option><option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option></select>
+<button onclick="salvarCliente()">Salvar</button>
+<button onclick="limparCliente()">Cancelar</button>
 
-<h2>Clientes</h2>
-<table>
-<thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Estado</th><th>Ação</th></tr></thead>
-<tbody id="clientesLista"></tbody>
-</table>
+<table><tbody id="clientesLista"></tbody></table>
 
 <h2>Movimentação</h2>
 <input id="data" type="date">
@@ -29,15 +21,9 @@
 <input id="sacos" type="number" placeholder="Sacos">
 <input id="valor" type="number" placeholder="Valor">
 <input id="pago" type="number" placeholder="Pago">
-<button onclick="salvarMovimento()">Salvar Transporte</button>
+<button onclick="salvarMov()">Salvar</button>
 
-<h2>Lançamentos</h2>
-<table>
-<thead><tr><th>Data</th><th>Cliente</th><th>Caixas</th><th>Sacos</th><th>Itens</th><th>Valor</th><th>Pago</th><th>Restante</th><th>Ação</th></tr></thead>
-<tbody id="relatorio"></tbody>
-</table>
-
+<table><tbody id="relatorio"></tbody></table>
 </div>
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
