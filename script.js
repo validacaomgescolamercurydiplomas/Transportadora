@@ -1,12 +1,12 @@
 
 let clientes=JSON.parse(localStorage.getItem('clientes'))||[];
 let movimentos=JSON.parse(localStorage.getItem('movimentos'))||[];
+let editCliente=-1;
+let editMov=-1;
 
 document.addEventListener('input',e=>{
- if(e.target.tagName==='INPUT' && e.target.type!=='number' && e.target.type!=='date'){
-  let pos=e.target.selectionStart;
+ if(e.target.tagName==='INPUT' && e.target.type==='text'){
   e.target.value=e.target.value.toUpperCase();
-  e.target.setSelectionRange(pos,pos);
  }
 });
 
@@ -16,27 +16,96 @@ telefoneCliente.addEventListener('input',function(){
 });
 
 function salvarCliente(){
- if(!nomeCliente.value){alert('INFORME O CLIENTE');return;}
- clientes.push({nome:nomeCliente.value,telefone:telefoneCliente.value,cidade:cidadeCliente.value,estado:estadoCliente.value});
+ let c={nome:nomeCliente.value,telefone:telefoneCliente.value,cidade:cidadeCliente.value,estado:estadoCliente.value};
+ if(editCliente>=0) clientes[editCliente]=c; else clientes.push(c);
  localStorage.setItem('clientes',JSON.stringify(clientes));
+ editCliente=-1;
+ limparCliente();
  carregar();
 }
 
-function carregar(){
- cliente.innerHTML='';
- clientes.forEach(c=>cliente.innerHTML+=`<option>${c.nome}</option>`);
- clientesLista.innerHTML=clientes.map(c=>`<tr><td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td></tr>`).join('');
+function editarCliente(i){
+ editCliente=i;
+ let c=clientes[i];
+ nomeCliente.value=c.nome;
+ telefoneCliente.value=c.telefone;
+ cidadeCliente.value=c.cidade;
+ estadoCliente.value=c.estado;
 }
 
-function salvarMov(){
- if(!data.value){alert('INFORME A DATA');return;}
- movimentos.push({data:data.value,cliente:cliente.value,caixas:+caixas.value,sacos:+sacos.value,valor:+valor.value,pago:+pago.value});
- localStorage.setItem('movimentos',JSON.stringify(movimentos));
+function excluirCliente(i){
+ if(confirm('Excluir cliente?')){
+ clientes.splice(i,1);
+ localStorage.setItem('clientes',JSON.stringify(clientes));
+ carregar();
+ }
+}
+
+function cancelarCliente(){
+ editCliente=-1;
+ limparCliente();
+}
+
+function limparCliente(){
+ nomeCliente.value='';
+ telefoneCliente.value='';
+ cidadeCliente.value='';
+ estadoCliente.value='';
+}
+
+function carregar(){
+ cliente.innerHTML=clientes.map(c=>`<option>${c.nome}</option>`).join('');
+ clientesLista.innerHTML=clientes.map((c,i)=>`
+ <tr>
+ <td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td>
+ <td><button onclick="editarCliente(${i})">ALTERAR</button>
+ <button onclick="excluirCliente(${i})">EXCLUIR</button></td>
+ </tr>`).join('');
  mostrar();
 }
 
-function mostrar(){
- relatorio.innerHTML=movimentos.map(m=>`<tr><td>${m.data}</td><td>${m.cliente}</td><td>${m.caixas}</td><td>${m.sacos}</td><td>${m.caixas+m.sacos}</td><td>${m.valor}</td><td>${m.pago}</td><td>${m.valor-m.pago}</td></tr>`).join('');
+function salvarMov(){
+ if(!data.value){alert('INFORME A DATA');return}
+ let m={data:data.value,cliente:cliente.value,caixas:+caixas.value,sacos:+sacos.value,valor:+valor.value,pago:+pago.value};
+ if(editMov>=0) movimentos[editMov]=m; else movimentos.push(m);
+ localStorage.setItem('movimentos',JSON.stringify(movimentos));
+ editMov=-1;
+ mostrar();
 }
+
+function editarMov(i){
+ editMov=i;
+ let m=movimentos[i];
+ data.value=m.data;
+ cliente.value=m.cliente;
+ caixas.value=m.caixas;
+ sacos.value=m.sacos;
+ valor.value=m.valor;
+ pago.value=m.pago;
+}
+
+function excluirMov(i){
+ if(confirm('Excluir movimentação?')){
+ movimentos.splice(i,1);
+ localStorage.setItem('movimentos',JSON.stringify(movimentos));
+ mostrar();
+ }
+}
+
+function mostrar(){
+ relatorio.innerHTML=movimentos.map((m,i)=>`
+ <tr>
+ <td>${m.data.split('-').reverse().join('/')}</td>
+ <td>${m.cliente}</td>
+ <td>${m.caixas}</td>
+ <td>${m.sacos}</td>
+ <td>${m.caixas+m.sacos}</td>
+ <td>R$${m.valor}</td>
+ <td>R$${m.pago}</td>
+ <td>R$${m.valor-m.pago}</td>
+ <td><button onclick="editarMov(${i})">ALTERAR</button>
+ <button onclick="excluirMov(${i})">EXCLUIR</button></td>
+ </tr>`).join('');
+}
+
 carregar();
-mostrar();
