@@ -1,29 +1,43 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Controle Transportadora</title><link rel="stylesheet" href="style.css"></head>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Controle Transportadora</title>
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
 <div class="container">
-<h1>Controle Transportadora</h1>
+<h1>CONTROLE TRANSPORTADORA</h1>
 
-<h2>Cadastro Cliente</h2>
-<input id="nomeCliente" placeholder="Cliente">
-<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15" oninput="mascaraTelefone(this)">
-<input id="cidadeCliente" placeholder="Cidade">
-<select id="estadoCliente"><option>Selecione</option><option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option></select>
-<button onclick="salvarCliente()">Salvar</button>
-<button onclick="limparCliente()">Cancelar</button>
+<h2>CADASTRO CLIENTE</h2>
+<input id="nomeCliente" placeholder="CLIENTE">
+<input id="telefoneCliente" placeholder="(00) 00000-0000" maxlength="15">
+<input id="cidadeCliente" placeholder="CIDADE">
+<select id="estadoCliente">
+<option value="">ESTADO</option>
+<option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option>
+</select>
+<button onclick="salvarCliente()">SALVAR CLIENTE</button>
 
-<table><tbody id="clientesLista"></tbody></table>
+<h2>CLIENTES</h2>
+<table>
+<tbody id="clientesLista"></tbody>
+</table>
 
-<h2>Movimentação</h2>
+<h2>MOVIMENTAÇÃO</h2>
 <input id="data" type="date">
 <select id="cliente"></select>
-<input id="caixas" type="number" placeholder="Caixas">
-<input id="sacos" type="number" placeholder="Sacos">
-<input id="valor" type="number" placeholder="Valor">
-<input id="pago" type="number" placeholder="Pago">
-<button onclick="salvarMov()">Salvar</button>
+<input id="caixas" type="number" placeholder="CAIXAS">
+<input id="sacos" type="number" placeholder="SACOS">
+<input id="valor" type="number" placeholder="VALOR">
+<input id="pago" type="number" placeholder="PAGO">
+<button onclick="salvarMov()">SALVAR MOVIMENTAÇÃO</button>
 
-<table><tbody id="relatorio"></tbody></table>
+<h2>RELATÓRIO</h2>
+<table>
+<tbody id="relatorio"></tbody>
+</table>
 </div>
 <script src="script.js"></script>
-</body></html>
+</body>
+</html>
