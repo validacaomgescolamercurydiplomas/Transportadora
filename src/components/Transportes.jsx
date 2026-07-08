@@ -1,0 +1,1 @@
+export default function Transportes(){return <section><h2>Entrega</h2><input placeholder='Cliente'/><input placeholder='Sacos'/><input placeholder='Caixas'/><input placeholder='Valor'/><button>Salvar</button></section>}
