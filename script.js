@@ -28,6 +28,7 @@ function salvarCliente(){
  let c={nome:nomeCliente.value,telefone:telefoneCliente.value,cidade:cidadeCliente.value,estado:estadoCliente.value};
  if(editCliente>=0)clientes[editCliente]=c;else clientes.push(c);
  localStorage.setItem('clientes',JSON.stringify(clientes));
+ fecharCadastro();
  carregar();
 }
 
@@ -45,9 +46,27 @@ function salvarMov(){
 function editarMov(i){editMov=i;let m=movimentos[i];data.value=m.data;cliente.value=m.cliente;caixas.value=m.caixas;sacos.value=m.sacos;valor.value=m.valor;pago.value=m.pago}
 function excluirMov(i){if(confirm("Excluir movimentação?")){movimentos.splice(i,1);localStorage.setItem('movimentos',JSON.stringify(movimentos));mostrar()}}
 
+
+function abrirCadastro(){areaCadastro.style.display='block';}
+function fecharCadastro(){areaCadastro.style.display='none';}
+
+function buscarClientes(){
+ let termo=buscaCliente.value.toUpperCase();
+ if(!termo){
+  clientesLista.innerHTML='';
+  return;
+ }
+ clientesLista.innerHTML=clientes.filter(c=>(
+ c.nome+c.telefone+c.cidade+c.estado
+ ).toUpperCase().includes(termo)).map((c,i)=>`
+ <tr><td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td>
+ <td><button onclick="editarCliente(${i})">ALTERAR</button>
+ <button onclick="excluirCliente(${i})">EXCLUIR</button></td></tr>`).join('');
+}
+
 function carregar(){
  cliente.innerHTML=clientes.map(c=>`<option>${c.nome}</option>`).join('');
- clientesLista.innerHTML=clientes.map((c,i)=>`<tr><td>${c.nome}</td><td>${c.telefone}</td><td>${c.cidade}</td><td>${c.estado}</td><td><button onclick="editarCliente(${i})">ALTERAR</button><button onclick="excluirCliente(${i})">EXCLUIR</button></td></tr>`).join('');
+ clientesLista.innerHTML='';
  mostrar();
 }
 

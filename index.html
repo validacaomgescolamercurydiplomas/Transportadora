@@ -19,6 +19,8 @@
 <div id="resumo"></div>
 
 <h2>CADASTRO CLIENTE</h2>
+<button onclick="abrirCadastro()">+ NOVO CLIENTE</button>
+<div id="areaCadastro" style="display:none">
 <input id="nomeCliente" placeholder="CLIENTE">
 <input id="telefoneCliente" placeholder="(00) 00000-0000">
 <input id="cidadeCliente" placeholder="CIDADE">
@@ -27,6 +29,10 @@
 <option>MG</option><option>SP</option><option>RJ</option><option>GO</option><option>BA</option><option>TO</option>
 </select>
 <button onclick="salvarCliente()">SALVAR CLIENTE</button>
+<button onclick="fecharCadastro()">CANCELAR</button>
+</div>
+
+<input id="buscaCliente" placeholder="BUSCAR CLIENTE" onkeyup="buscarClientes()">
 
 <table>
 <tbody id="clientesLista"></tbody>
