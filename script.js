@@ -65,9 +65,19 @@ function buscarClientes(){
 }
 
 function carregar(){
- cliente.innerHTML=clientes.map(c=>`<option>${c.nome}</option>`).join('');
+ cliente.innerHTML='';
  clientesLista.innerHTML='';
  mostrar();
+}
+
+function buscarClienteMov(){
+ let termo=buscaMovCliente.value.toUpperCase();
+ if(!termo){
+  cliente.innerHTML='';
+  return;
+ }
+ cliente.innerHTML=clientes.filter(c=>c.nome.toUpperCase().includes(termo))
+ .map(c=>`<option>${c.nome}</option>`).join('');
 }
 
 function mostrar(lista=movimentos){
