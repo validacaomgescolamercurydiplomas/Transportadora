@@ -88,3 +88,40 @@ tr:hover{
     border-radius:12px;
     font-weight:bold;
 }
+
+
+/* Botões com cores por função */
+
+button{
+    color:white;
+    font-weight:700;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+}
+
+/* Salvar / Novo cliente */
+button[onclick*="salvar"],
+button[onclick*="mostrarCadastro"]{
+    background:#16a34a;
+}
+
+/* Alterar */
+button[onclick*="editar"]{
+    background:#2563eb;
+}
+
+/* Excluir */
+button[onclick*="excluir"]{
+    background:#dc2626;
+}
+
+/* Cancelar */
+button[onclick*="cancelar"]{
+    background:#64748b;
+}
+
+button:hover{
+    filter:brightness(1.1);
+    transform:translateY(-2px);
+}
